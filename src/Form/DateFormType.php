@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Date;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -35,6 +36,11 @@ class DateFormType extends AbstractType
                 'asset_helper' => true,
                 'attr' => ['class' => 'form-control my-2'],
                 'label' => "Image"
+            ])
+            ->add('password', PasswordType::class, [
+                'attr' => ['class' => 'form-control', "placeholder" => "Mot de Passe"],
+                'label' => "Mot de Passe",
+                'mapped' => false
             ])
             ->add("submit", SubmitType::class, [
                 "label" => "Envoyer",

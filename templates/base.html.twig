@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Welcome!{% endblock %}</title>
     <link rel="icon"
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
@@ -53,10 +54,11 @@
             }
 
             body {
-                background: rgb(239,250,166);
-                background: linear-gradient(180deg, rgba(239,250,166,0.1334908963585434) 0%, rgba(78,255,192,1) 25%, rgba(0,212,255,1) 100%);
-
+                background: rgb(128,88,124);
+                background: linear-gradient(90deg, rgba(128,88,124,1) 0%, rgba(199,131,138,1) 51%, rgba(230,185,148,1) 100%);
             }
+            h1{ text-shadow: 0 0 2px #000000;}
+            h4{ text-shadow: 0 0 2px #000000;}
         </style>
     {% endblock %}
 

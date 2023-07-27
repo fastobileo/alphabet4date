@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DateController extends AbstractController
 {
-    #[Route('/date', name: 'app_date')]
+    #[Route('/', name: 'app_date')]
     public function index(EntityManagerInterface $entityManager): Response
     {
         $repository = $entityManager->getRepository(Date::class);
@@ -27,6 +27,8 @@ class DateController extends AbstractController
     #[Route('/date/edit/{id}', name: 'app_date_edit')]
     public function edit(Request $request, EntityManagerInterface $entityManager, int $id): Response
     {
+        $errors = [];
+
         $repository = $entityManager->getRepository(Date::class);
         $date = $repository->find($id);
 
@@ -34,14 +36,19 @@ class DateController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($date);
-            $entityManager->flush();
+            if ($form->get('password')->getData() == "6mars") {
+                $entityManager->persist($date);
+                $entityManager->flush();
+                return $this->redirectToRoute('app_date');
+            } else {
+                $errors[] = ["message" => "Mot de passe incorrect"];
+            }
 
-            return $this->redirectToRoute('app_date');
         }
         return $this->render('date/edit.html.twig', [
             'form' => $form,
-            'date' => $date
+            'date' => $date,
+            'errors' => $errors
         ]);
     }
 }
