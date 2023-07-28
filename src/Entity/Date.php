@@ -26,20 +26,18 @@ class Date
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $date = null;
-
-    #[Vich\UploadableField(mapping: 'dates', fileNameProperty: 'image.name', size: 'image.size')]
+    #[Vich\UploadableField(mapping: 'dates', fileNameProperty: 'imageName', size: 'imageSize')]
     private ?File $imageFile = null;
 
-    #[ORM\Embedded(class: 'Vich\UploaderBundle\Entity\File')]
-    private ?EmbeddedFile $image = null;
+    #[ORM\Column(nullable: true)]
+    private ?string $imageName = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $imageSize = null;
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    public function __construct()
-    {
-        $this->image = new EmbeddedFile();
-    }
 
     public function getId(): ?int
     {
@@ -81,7 +79,6 @@ class Date
 
         return $this;
     }
-
     public function setImageFile(?File $imageFile = null): void
     {
         $this->imageFile = $imageFile;
@@ -98,19 +95,24 @@ class Date
         return $this->imageFile;
     }
 
-    public function setImage(EmbeddedFile $image): void
+    public function setImageName(?string $imageName): void
     {
-        $this->image = $image;
+        $this->imageName = $imageName;
     }
 
-    public function getImage(): ?EmbeddedFile
+    public function getImageName(): ?string
     {
-        return $this->image;
+        return $this->imageName;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    public function setImageSize(?int $imageSize): void
     {
-        return $this->updatedAt;
+        $this->imageSize = $imageSize;
+    }
+
+    public function getImageSize(): ?int
+    {
+        return $this->imageSize;
     }
 
 }
